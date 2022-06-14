@@ -1,0 +1,83 @@
+---
+- name: Установка Docker
+  block:
+    - name: Установка aptitude
+      apt:
+        name: aptitude
+        state: latest
+        update_cache: true
+
+    - name: Добавляем univers
+      apt_repository:
+        repo: "deb http://us.archive.ubuntu.com/ubuntu/ {{ ansible_distribution_release }} universe"
+        state: present
+
+    - name: Установка дополнительных пакетов
+      apt:
+        pkg:
+          - ca-certificates
+          - curl
+          - gnupg
+          - lsb-release
+          - python3-pip
+        update-cache: true
+        cache_valid_time: 86400
+
+    - name: Добавление ключа Docker
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+
+    - name: Установка стабильного репозитория
+      apt_repository:
+        repo: "deb https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
+        state: present
+
+    - name: Установка Docker-ce, Docker-cli
+      apt:
+        name:
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+        state: latest
+        update_cache: true
+
+    - name: Проверка что Docker установлен и перезагружен
+      service:
+        name: docker
+        state: restarted
+        enabled: true
+  become: true
+
+- name: Установка Docker-Compose
+  block:
+    - name: Получение последней версии Docker-Compose
+      uri:
+        url: "https://api.github.com/repos/docker/compose/releases/latest"
+        body_format: json
+      register: page
+
+    - name: Установка Docker-Compose
+      get_url:
+        url: "https://github.com/docker/compose/releases/download/{{ page.json.tag_name }}/docker-compose-linux-x86_64"
+        dest: /usr/local/bin/docker-compose
+        mode: 0755
+  become: true
+
+- name: Настройка дополнительных пакетов Python
+  block:
+    - name: Установка pip пакетов
+      pip:
+        name: docker
+
+- name: Завершение установки
+  block:
+    - name: Добавление пользователя в группу Docker
+      user:
+        name: "{{ ansible_user }}"
+        groups: docker
+        append: true
+
+    - name: Перезагрузка
+      reboot:
+  become: true
