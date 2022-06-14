@@ -3,7 +3,7 @@ galaxy_info:
   description: Сборка монорепозитория
   author: Vladislav
   license: MY_LIC
-  min_ansible_version: "2.9"
+  min_ansible_version: 2.9
   platforms:
     - name: Ubuntu
       versions:

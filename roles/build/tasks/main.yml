@@ -8,7 +8,7 @@
 - name: Собираем image
   community.docker.docker_image:
     name: "{{ registry_name }}{{ item.name }}"
-    tag: "{{ item.version}}"
+    tag: "{{ item.version }}"
     push: true
     build:
       path: "{{ git_folder }}"
