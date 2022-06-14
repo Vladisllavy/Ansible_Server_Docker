@@ -18,5 +18,5 @@
             target_port: 3000
         secrets:
           - secret_name: "{{ name }}.env"
-            filename: /opt/app/.env
+            filename: "/opt/app/.env"
   tags: "{{ name }}"

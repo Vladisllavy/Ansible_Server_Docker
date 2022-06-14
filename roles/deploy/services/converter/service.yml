@@ -13,5 +13,5 @@
           - name: "{{ network_name }}"
         secrets:
           - secret_name: "{{ name }}.env"
-            filename: /opt/app/.env
+            filename: "/opt/app/.env"
   tags: "{{ name }}"

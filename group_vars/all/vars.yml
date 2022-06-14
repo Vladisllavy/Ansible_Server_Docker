@@ -10,6 +10,7 @@ rmq_defaults:
     value: rmq
 
 registry_name: "localhost:5000/"
+
 services:
   - name: api
     version: latest
@@ -18,12 +19,12 @@ services:
   - name: converter
     version: latest
   - name: rmq
-    version: latest
+    version: 3-management
 
 non_build_service:
   - name: rmq
-    version: latest
+    version: 3-management
 
 configs:
-  - converter:
+  converter:
     queue: q_imageProcessor

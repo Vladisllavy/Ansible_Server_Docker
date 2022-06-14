@@ -13,7 +13,4 @@
             protocol: tcp
             published_port : 3001
             target_port: 80
-        secrets:
-          - secret_name: "{{ name }}.env"
-            filename: /opt/app/.env
   tags: "{{ name }}"
