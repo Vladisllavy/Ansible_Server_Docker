@@ -8,16 +8,23 @@
       tags: build
     - role: deploy
       tags: deploy
-    #- swarm_init
+    - role: swarm_init
+      tags: swarm_init
 
 - name: Manager Servers
   hosts: managers
   roles:
-    - preconfig
-    #- swarm_join
+    - role: preconfig
+      tags: preconfig
+    - role: swarm_join
+      type: manager
+      tags: swarm_join
 
 - name: Worker Servers
   hosts: workers
   roles:
-    - preconfig
-    #- swarm_join
+    - role: preconfig
+      tags: preconfig
+    - role: swarm_join
+      type: worker
+      tags: swarm_join
