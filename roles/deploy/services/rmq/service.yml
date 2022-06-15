@@ -8,7 +8,7 @@
         state: present
         networks:
           - name: "{{ network_name }}"
-        env: 
+        env:
           - RABBITMQ_DEFAULT_USER={{ rmq.user }}
           - RABBITMQ_DEFAULT_PASS={{ rmq.password }}
   tags: "{{ name }}"

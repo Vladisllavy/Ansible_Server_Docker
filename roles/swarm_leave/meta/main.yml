@@ -1,6 +1,6 @@
 galaxy_info:
   role_name: swarm_leave
-  description: Отсоединение от swarm
+  description: Удаление ноды из swarm
   author: Vladislav
   license: MY_LIC
   min_ansible_version: "2.9"

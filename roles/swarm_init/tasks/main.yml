@@ -5,8 +5,8 @@
     advertise_addr: "{{ advertise_addr }}"
   register: token
 
-- name: Сохранение токена
+- name: Сохранение токенов
   set_fact:
     token_manager: "{{ token.swarm_facts.JoinTokens.Manager }}" 
-    token-worker: "{{ token.swarm_facts.JoinTokens.Worker }}"
+    token_worker: "{{ token.swarm_facts.JoinTokens.Worker }}"
     cacheable: true

@@ -9,8 +9,6 @@ rmq_defaults:
   - name: AMQP_HOSTNAME
     value: rmq
 
-registry_name: "localhost:5000/"
-
 services:
   - name: api
     version: latest
@@ -33,4 +31,5 @@ configs:
   converter:
     queue: q_imageProcessor
 
+registry_name: "localhost:5000/"
 advertise_addr: 10.11.10.1
